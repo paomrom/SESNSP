@@ -1,0 +1,482 @@
+
+########################### base 2019 ###########################################
+library(readxl)
+library(dplyr)
+
+base_2019 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2019.xlsx")
+
+base_2019 %>% names()
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vf_2019<-base_2019 %>% filter(Clave_Ent==14,
+                     `Tipo de delito`== "Violencia familiar") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+
+
+######## base 2020 #############
+library(readxl)
+library(dplyr)
+
+base_2020 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2020.xlsx")
+
+base_2020 %>% names()
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vf_2020<-base_2020 %>% filter(Clave_Ent==14,
+                              `Tipo de delito`== "Violencia familiar") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+
+
+######## base 2021 #############
+library(readxl)
+library(dplyr)
+
+base_2021 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2021.xlsx")
+
+base_2021 %>% names()
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vf_2021_int<-base_2021 %>% filter(Clave_Ent==14,
+                              `Tipo de delito`== "Violencia familiar") %>% 
+        filter( Municipio%in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+
+# Unir tablas mensuales de 2019 al 2021
+library(xlsx)
+
+
+vf_mensual_dist1<-rbind(vf_2019, vf_2020, vf_2021)
+
+write.csv(vf_mensual_dist1, file="violencia_fam_dist1.csv")
+
+
+
+
+
+
+##################################################3
+########################### base 2019 interior ###########################################
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vf_2019_edo<-base_2019 %>% filter(Clave_Ent==14,
+                              `Tipo de delito`== "Violencia familiar") %>% 
+        #filter( Municipio != dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+
+
+######## base 2020  interior #############
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vf_2020_edo <-base_2020 %>% filter(Clave_Ent==14,
+                              `Tipo de delito`== "Violencia familiar") %>% 
+        #filter( Municipio != dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+
+
+######## base 2021 interior #############
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vf_2021_edo<-base_2021 %>% filter(Clave_Ent==14,
+                                  `Tipo de delito`== "Violencia familiar") %>% 
+        #filter( Municipio != dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+
+# Unir tablas mensuales de 2019 al 2021
+
+vf_mensual_edo<-rbind(vf_2019_edo, vf_2020_edo, vf_2021_edo)
+
+write.csv(vf_mensual_edo, file="violencia_fam_edo.csv")
+
+#####################################################################################
+#################################Violación 2019######################################
+#####################################################################################
+base_2019$`Tipo de delito` <- as.character(base_2019$`Tipo de delito`)
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vio_2019_int<-base_2019 %>% filter(Clave_Ent==14,
+                              `Tipo de delito`== "Violación") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+#####################################################################################
+#################################Violación 2019 interior######################################
+#####################################################################################
+base_2019$`Tipo de delito` <- as.character(base_2019$`Tipo de delito`)
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vio_2019_int<-base_2019 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+#################################Violación interior  2020######################################
+#####################################################################################
+base_2020$`Tipo de delito` <- as.character(base_2020$`Tipo de delito`)
+base_2020$`Tipo de delito`[base_2020$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2020$`Tipo de delito`[base_2020$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vio_2020_int<-base_2020 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+#####################################################################################
+#################################Violación 2019 interior######################################
+#####################################################################################
+base_2019$`Tipo de delito` <- as.character(base_2019$`Tipo de delito`)
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vio_2019_int<-base_2019 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+#################################Violación interior  2020######################################
+#####################################################################################
+base_2021$`Tipo de delito` <- as.character(base_2021$`Tipo de delito`)
+base_2021$`Tipo de delito`[base_2021$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2021$`Tipo de delito`[base_2021$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+vio_2021_int<-base_2021 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+########### Unir interior de violacion
+
+vio_mensual_dist1<- rbind(vio_2019_int, vio_2020_int, vio_2021_int)
+
+
+write.csv(vio_mensual_dist1, file="violacion_dist1.csv")
+
+#################### 2019 edo #####################
+vio_2019_edo<-base_2019 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        #filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+#################### 2020 violacion edo #####################
+vio_2020_edo<-base_2020 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        #filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+#################### 2020 violacion edo #####################
+vio_2021_edo<-base_2021 %>% filter(Clave_Ent==14,
+                                   `Tipo de delito`== "Violación") %>% 
+        #filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+vio_mensual_edo<-rbind(vio_2019_edo, vio_2020_edo, vio_2021_edo)
+write.csv(vio_mensual_edo, file="violacion_edo.csv")
+
+
+
+############### abuso sexual ##############
+
+# DISTRITO 1
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+abs_2019_dis1<-base_2019 %>% filter(Clave_Ent==14,
+                              `Tipo de delito`== "Abuso sexual") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+abs_2020_dis1<-base_2020 %>% filter(Clave_Ent==14,
+                                    `Tipo de delito`== "Abuso sexual") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+abs_2021_dis1<-base_2021 %>% filter(Clave_Ent==14,
+                                    `Tipo de delito`== "Abuso sexual") %>% 
+        filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+abu_mensual_dist1 <- rbind(abs_2019_dis1, abs_2020_dis1, abs_2021_dis1)
+write.csv(abu_mensual_dist1, file="abs_dist1.csv")
+
+
+############### abuso sexual ##############
+
+# Total estado
+dist1 <- c("Guadalajara", "San Pedro Tlaquepaque", "Tlajomulco de Zúñiga", "Tonalá", "Zapopan", "Zapotlanejo")
+
+abs_2019_edo<-base_2019 %>% filter(Clave_Ent==14,
+                                    `Tipo de delito`== "Abuso sexual") %>% 
+        #filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+abs_2020_edo<-base_2020 %>% filter(Clave_Ent==14,
+                                    `Tipo de delito`== "Abuso sexual") %>% 
+        #filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+abs_2021_edo<-base_2021 %>% filter(Clave_Ent==14,
+                                    `Tipo de delito`== "Abuso sexual") %>% 
+        #filter( Municipio %in% dist1) %>% 
+        summarise(ene=sum(Enero),
+                  feb=sum(Febrero),
+                  mar=sum(Marzo),
+                  abr=sum(Abril),
+                  may=sum(Mayo),
+                  jun=sum(Junio),
+                  jul=sum(Julio),
+                  ago=sum(Agosto),
+                  sep=sum(Septiembre),
+                  oct=sum(Octubre),
+                  nov=sum(Noviembre),
+                  dic=sum(Diciembre))
+
+abu_mensual_edo <- rbind(abs_2019_edo, abs_2020_edo, abs_2021_edo)
+write.csv(abu_mensual_edo, file="abs_edo.csv")
