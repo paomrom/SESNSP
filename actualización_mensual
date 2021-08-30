@@ -1,0 +1,638 @@
+#Instalación de librerias
+pacman::p_load(readxl, tidyverse, dplyr, readr, sf, gganimate, gifski, stringr, rebus, scales, gridExtra)
+
+#Cargar bases
+base_2015 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2015.xlsx")
+base_2016 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2016.xlsx")
+base_2017 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2017.xlsx")
+base_2018 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2018.xlsx")
+base_2019 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2019.xlsx")
+base_2020 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2020.xlsx")
+base_2021 <- read_excel("~/Desktop/Municipal-Delitos-2015-2021_jul2021/2021.xlsx")
+
+
+#Homologar Violaciones 2015
+base_2015$`Tipo de delito` <- as.character(base_2015$`Tipo de delito`)
+base_2015$`Tipo de delito`[base_2015$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2015$`Tipo de delito`[base_2015$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+#Homologar Violaciones 2016
+base_2016$`Tipo de delito` <- as.character(base_2016$`Tipo de delito`)
+base_2016$`Tipo de delito`[base_2016$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2016$`Tipo de delito`[base_2016$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+#Homologar Violaciones 2017
+base_2017$`Tipo de delito` <- as.character(base_2017$`Tipo de delito`)
+base_2017$`Tipo de delito`[base_2017$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2017$`Tipo de delito`[base_2017$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+#Homologar Violaciones 2018
+base_2018$`Tipo de delito` <- as.character(base_2018$`Tipo de delito`)
+base_2018$`Tipo de delito`[base_2018$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2018$`Tipo de delito`[base_2018$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+#Homologar Violaciones 2019
+base_2019$`Tipo de delito` <- as.character(base_2019$`Tipo de delito`)
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2019$`Tipo de delito`[base_2019$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+#Homologar Violaciones 2020
+base_2020$`Tipo de delito` <- as.character(base_2020$`Tipo de delito`)
+base_2020$`Tipo de delito`[base_2020$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2020$`Tipo de delito`[base_2020$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+#Homologar Violaciones 2021
+base_2021$`Tipo de delito` <- as.character(base_2021$`Tipo de delito`)
+base_2021$`Tipo de delito`[base_2021$`Tipo de delito`=="Violación equiparada"] <- "Violación"
+base_2021$`Tipo de delito`[base_2021$`Tipo de delito`=="Violación simple"] <- "Violación"
+
+########## Abuso sexual########
+abs_2015<-base_2015 %>% group_by(Municipio, `Tipo de delito`) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2015=sum(ene+feb+mar+abr+ 
+                        may+jun+jul+ago+
+                        sep+oct+nov+dic)) %>% 
+  select(Municipio, `Tipo de delito`, `Total_2015`)
+
+
+abs_2016<-base_2016 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2016=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2016`)
+
+abs_2017<-base_2017 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2017=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2017`)
+
+
+abs_2018<-base_2018 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2018=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2018`)
+
+abs_2019<-base_2019 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2019=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select( `Total_2019`)
+
+abs_2020<-base_2020 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2020=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2020`)
+
+abs_2021<-base_2021 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Abuso sexual",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero, na.rm=T),
+            feb=sum(Febrero, na.rm=T),
+            mar=sum(Marzo, na.rm=T),
+            abr=sum(Abril, na.rm=T),
+            may=sum(Mayo, na.rm=T),
+            jun=sum(Junio, na.rm=T),
+            jul=sum(Julio, na.rm=T),
+            ago=sum(Agosto, na.rm=T),
+            sep=sum(Septiembre, na.rm=T),
+            oct=sum(Octubre, na.rm=T),
+            nov=sum(Noviembre, na.rm=T),
+            dic=sum(Diciembre,na.rm=T),
+            Total_2021=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2021`)
+
+
+abuso_actualizado<- cbind(abs_2015, abs_2016, abs_2017, abs_2018, abs_2019, abs_2020, abs_2021)
+write.csv(abuso_actualizado, file="abuso_actualizado.csv")
+
+
+########## Feminicidio########
+fem_2015<-base_2015 %>% group_by(Municipio, `Tipo de delito`) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2015=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(Municipio, `Tipo de delito`, `Total_2015`)
+
+
+fem_2016<-base_2016 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2016=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2016`)
+
+fem_2017<-base_2017 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2017=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2017`)
+
+
+fem_2018<-base_2018 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2018=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2018`)
+
+fem_2019<-base_2019 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2019=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select( `Total_2019`)
+
+fem_2020<-base_2020 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2020=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2020`)
+
+fem_2021<-base_2021 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Feminicidio",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero, na.rm=T),
+            feb=sum(Febrero, na.rm=T),
+            mar=sum(Marzo, na.rm=T),
+            abr=sum(Abril, na.rm=T),
+            may=sum(Mayo, na.rm=T),
+            jun=sum(Junio, na.rm=T),
+            jul=sum(Julio, na.rm=T),
+            ago=sum(Agosto, na.rm=T),
+            sep=sum(Septiembre, na.rm=T),
+            oct=sum(Octubre, na.rm=T),
+            nov=sum(Noviembre, na.rm=T),
+            dic=sum(Diciembre,na.rm=T),
+            Total_2021=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2021`)
+
+
+fem_actualizado<- cbind(fem_2015, fem_2016, fem_2017, fem_2018, fem_2019, fem_2020, fem_2021)
+write.csv(fem_actualizado, file="fem_actualizado.csv")
+
+########## Violación ########
+vio_2015<-base_2015 %>% group_by(Municipio, `Tipo de delito`) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2015=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(Municipio, `Tipo de delito`, `Total_2015`)
+
+
+vio_2016<-base_2016 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2016=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2016`)
+
+vio_2017<-base_2017 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2017=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2017`)
+
+
+vio_2018<-base_2018 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2018=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2018`)
+
+vio_2019<-base_2019 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2019=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select( `Total_2019`)
+
+vio_2020<-base_2020 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2020=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2020`)
+
+vio_2021<-base_2021 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violación",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero, na.rm=T),
+            feb=sum(Febrero, na.rm=T),
+            mar=sum(Marzo, na.rm=T),
+            abr=sum(Abril, na.rm=T),
+            may=sum(Mayo, na.rm=T),
+            jun=sum(Junio, na.rm=T),
+            jul=sum(Julio, na.rm=T),
+            ago=sum(Agosto, na.rm=T),
+            sep=sum(Septiembre, na.rm=T),
+            oct=sum(Octubre, na.rm=T),
+            nov=sum(Noviembre, na.rm=T),
+            dic=sum(Diciembre,na.rm=T),
+            Total_2021=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2021`)
+
+
+vio_actualizado<- cbind(vio_2015, vio_2016, vio_2017, vio_2018, vio_2019, vio_2020, vio_2021)
+write.csv(vio_actualizado, file="vio_actualizado.csv")
+
+
+
+########## Violencia familiar########
+viofam_2015<-base_2015 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2015=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(Municipio, `Total_2015`)
+
+
+viofam_2016<-base_2016 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2016=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2016`)
+
+viofam_2017<-base_2017 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2017=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2017`)
+
+
+viofam_2018<-base_2018 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2018=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2018`)
+
+viofam_2019<-base_2019 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2019=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2019`)
+
+viofam_2020<-base_2020 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero),
+            feb=sum(Febrero),
+            mar=sum(Marzo),
+            abr=sum(Abril),
+            may=sum(Mayo),
+            jun=sum(Junio),
+            jul=sum(Julio),
+            ago=sum(Agosto),
+            sep=sum(Septiembre),
+            oct=sum(Octubre),
+            nov=sum(Noviembre),
+            dic=sum(Diciembre),
+            Total_2020=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2020`)
+
+viofam_2021<-base_2021 %>% group_by(Municipio) %>% 
+  filter(`Tipo de delito`== "Violencia familiar",
+         Clave_Ent==14) %>%
+  summarise(ene=sum(Enero, na.rm=T),
+            feb=sum(Febrero, na.rm=T),
+            mar=sum(Marzo, na.rm=T),
+            abr=sum(Abril, na.rm=T),
+            may=sum(Mayo, na.rm=T),
+            jun=sum(Junio, na.rm=T),
+            jul=sum(Julio, na.rm=T),
+            ago=sum(Agosto, na.rm=T),
+            sep=sum(Septiembre, na.rm=T),
+            oct=sum(Octubre, na.rm=T),
+            nov=sum(Noviembre, na.rm=T),
+            dic=sum(Diciembre,na.rm=T),
+            Total_2021=sum(ene+feb+mar+abr+ 
+                             may+jun+jul+ago+
+                             sep+oct+nov+dic)) %>% 
+  select(`Total_2021`)
+
+
+viofam_actualizado<- cbind(viofam_2015, viofam_2016, viofam_2017, viofam_2018, viofam_2019, viofam_2020, viofam_2021) 
+write.csv(viofam_actualizado, file="viofam_actualizado.csv")
